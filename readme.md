@@ -79,7 +79,7 @@ show_match(MCTS(),MCTS())
 ├── othello_MCTS/
 │   ├── __init__.py          
 │   ├── bitboard.py          # Bitboard implementation for Othello
-│   ├── simulation.py        # basic funstions to show/play matches
+│   ├── simulation.py        # basic functions to show/play matches
 │   └── MCTS.py              # MCTS algorithm implementation
 ├── docs/                    # html documentation
 ├── images/                  # readme image
