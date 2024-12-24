@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>othello_MCTS &mdash; othello_MCTS 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="othello_MCTS package" href="othello_MCTS.html" />
+    <link rel="prev" title="Welcome to othello_MCTS’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            othello_MCTS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">othello_MCTS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html">othello_MCTS package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">othello_MCTS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">othello_MCTS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="othello-mcts">
+<h1>othello_MCTS<a class="headerlink" href="#othello-mcts" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="othello_MCTS.html">othello_MCTS package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html#module-othello_MCTS.MCTS">othello_MCTS.MCTS module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS"><code class="docutils literal notranslate"><span class="pre">MCTS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.back_propagate"><code class="docutils literal notranslate"><span class="pre">MCTS.back_propagate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.best_move"><code class="docutils literal notranslate"><span class="pre">MCTS.best_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.expand"><code class="docutils literal notranslate"><span class="pre">MCTS.expand()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.reset"><code class="docutils literal notranslate"><span class="pre">MCTS.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.run_mcts"><code class="docutils literal notranslate"><span class="pre">MCTS.run_mcts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.run_simulation"><code class="docutils literal notranslate"><span class="pre">MCTS.run_simulation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.MCTS.select"><code class="docutils literal notranslate"><span class="pre">MCTS.select()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.Node.set_uct"><code class="docutils literal notranslate"><span class="pre">Node.set_uct()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html#module-othello_MCTS.bitboard">othello_MCTS.bitboard module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard"><code class="docutils literal notranslate"><span class="pre">Bitboard</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.get_moves"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_moves()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.get_state"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.get_winner"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_winner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.initiate_board"><code class="docutils literal notranslate"><span class="pre">Bitboard.initiate_board()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.is_full"><code class="docutils literal notranslate"><span class="pre">Bitboard.is_full()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.make_mask"><code class="docutils literal notranslate"><span class="pre">Bitboard.make_mask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.play"><code class="docutils literal notranslate"><span class="pre">Bitboard.play()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.reset"><code class="docutils literal notranslate"><span class="pre">Bitboard.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.set_state"><code class="docutils literal notranslate"><span class="pre">Bitboard.set_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.show"><code class="docutils literal notranslate"><span class="pre">Bitboard.show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.show_with_possible_moves"><code class="docutils literal notranslate"><span class="pre">Bitboard.show_with_possible_moves()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.Bitboard.user_move"><code class="docutils literal notranslate"><span class="pre">Bitboard.user_move()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.bitboard.display_bits_in_grid"><code class="docutils literal notranslate"><span class="pre">display_bits_in_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html#module-othello_MCTS.simulation">othello_MCTS.simulation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.simulation.play_match"><code class="docutils literal notranslate"><span class="pre">play_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.simulation.play_single_match"><code class="docutils literal notranslate"><span class="pre">play_single_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.simulation.show_match"><code class="docutils literal notranslate"><span class="pre">show_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.simulation.tournament"><code class="docutils literal notranslate"><span class="pre">tournament()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="othello_MCTS.html#module-othello_MCTS">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard"><code class="docutils literal notranslate"><span class="pre">Bitboard</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.get_moves"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_moves()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.get_state"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.get_winner"><code class="docutils literal notranslate"><span class="pre">Bitboard.get_winner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.initiate_board"><code class="docutils literal notranslate"><span class="pre">Bitboard.initiate_board()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.is_full"><code class="docutils literal notranslate"><span class="pre">Bitboard.is_full()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.make_mask"><code class="docutils literal notranslate"><span class="pre">Bitboard.make_mask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.play"><code class="docutils literal notranslate"><span class="pre">Bitboard.play()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.reset"><code class="docutils literal notranslate"><span class="pre">Bitboard.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.set_state"><code class="docutils literal notranslate"><span class="pre">Bitboard.set_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.show"><code class="docutils literal notranslate"><span class="pre">Bitboard.show()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.show_with_possible_moves"><code class="docutils literal notranslate"><span class="pre">Bitboard.show_with_possible_moves()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Bitboard.user_move"><code class="docutils literal notranslate"><span class="pre">Bitboard.user_move()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS"><code class="docutils literal notranslate"><span class="pre">MCTS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.back_propagate"><code class="docutils literal notranslate"><span class="pre">MCTS.back_propagate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.best_move"><code class="docutils literal notranslate"><span class="pre">MCTS.best_move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.expand"><code class="docutils literal notranslate"><span class="pre">MCTS.expand()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.reset"><code class="docutils literal notranslate"><span class="pre">MCTS.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.run_mcts"><code class="docutils literal notranslate"><span class="pre">MCTS.run_mcts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.run_simulation"><code class="docutils literal notranslate"><span class="pre">MCTS.run_simulation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.MCTS.select"><code class="docutils literal notranslate"><span class="pre">MCTS.select()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.Node.set_uct"><code class="docutils literal notranslate"><span class="pre">Node.set_uct()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.display_bits_in_grid"><code class="docutils literal notranslate"><span class="pre">display_bits_in_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.play_match"><code class="docutils literal notranslate"><span class="pre">play_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.play_single_match"><code class="docutils literal notranslate"><span class="pre">play_single_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.show_match"><code class="docutils literal notranslate"><span class="pre">show_match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="othello_MCTS.html#othello_MCTS.tournament"><code class="docutils literal notranslate"><span class="pre">tournament()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to othello_MCTS’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="othello_MCTS.html" class="btn btn-neutral float-right" title="othello_MCTS package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, LASSIOUED Badis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

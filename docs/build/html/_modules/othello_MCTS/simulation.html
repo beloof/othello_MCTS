@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>othello_MCTS.simulation &mdash; othello_MCTS 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            othello_MCTS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">othello_MCTS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">othello_MCTS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">othello_MCTS.simulation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for othello_MCTS.simulation</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">othello_MCTS.bitboard</span> <span class="kn">import</span> <span class="n">Bitboard</span><span class="p">,</span> <span class="n">display_bits_in_grid</span>
+<span class="kn">from</span> <span class="nn">othello_MCTS.MCTS</span> <span class="kn">import</span> <span class="n">MCTS</span><span class="p">,</span> <span class="n">Node</span>
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
+
+
+
+
+<div class="viewcode-block" id="play_match">
+<a class="viewcode-back" href="../../othello_MCTS.html#othello_MCTS.simulation.play_match">[docs]</a>
+<span class="k">def</span> <span class="nf">play_match</span><span class="p">(</span><span class="n">player1</span><span class="p">,</span><span class="n">player2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plays a single match where player1 starts and returns the winner.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    player1 : MCTS or &#39;user&#39;</span>
+<span class="sd">        The first player of the match. Can be an instance of the MCTS class or a user input (&#39;user&#39;).</span>
+<span class="sd">    player2 : MCTS or &#39;user&#39;</span>
+<span class="sd">        The second player of the match. Can be an instance of the MCTS class or a user input (&#39;user&#39;).</span>
+
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    int</span>
+<span class="sd">        The winner of the match:</span>
+<span class="sd">            1 for player1,</span>
+<span class="sd">            -1 for player2,</span>
+<span class="sd">            0 for a draw.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bitboard</span> <span class="o">=</span> <span class="n">Bitboard</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="n">bitboard</span><span class="o">.</span><span class="n">winner</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">play</span> <span class="o">=</span> <span class="n">player1</span><span class="o">.</span><span class="n">run_mcts</span><span class="p">(</span><span class="n">bitboard</span><span class="o">.</span><span class="n">get_state</span><span class="p">())</span>
+        <span class="n">bitboard</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">play</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bitboard</span><span class="o">.</span><span class="n">winner</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">play</span> <span class="o">=</span> <span class="n">player2</span><span class="o">.</span><span class="n">run_mcts</span><span class="p">(</span><span class="n">bitboard</span><span class="o">.</span><span class="n">get_state</span><span class="p">())</span>
+        <span class="n">bitboard</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">play</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">bitboard</span><span class="o">.</span><span class="n">winner</span></div>
+
+
+<div class="viewcode-block" id="show_match">
+<a class="viewcode-back" href="../../othello_MCTS.html#othello_MCTS.simulation.show_match">[docs]</a>
+<span class="k">def</span> <span class="nf">show_match</span><span class="p">(</span><span class="n">player1</span><span class="p">,</span><span class="n">player2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plays and displays a single match where player1 starts.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    player1 : MCTS or &#39;user&#39;</span>
+<span class="sd">        The first player of the match. Can be an instance of the MCTS class or a user input (&#39;user&#39;).</span>
+<span class="sd">    player2 : MCTS or &#39;user&#39;</span>
+<span class="sd">        The second player of the match. Can be an instance of the MCTS class or a user input (&#39;user&#39;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mi">800</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="mi">800</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">))</span>
+    <span class="n">bitboard</span> <span class="o">=</span> <span class="n">Bitboard</span><span class="p">()</span>
+    <span class="n">bitboard</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="n">bitboard</span><span class="o">.</span><span class="n">winner</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">player1</span> <span class="o">==</span> <span class="s1">&#39;user&#39;</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+            <span class="n">bitboard</span><span class="o">.</span><span class="n">user_move</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">play</span> <span class="o">=</span> <span class="n">player1</span><span class="o">.</span><span class="n">run_mcts</span><span class="p">(</span><span class="n">bitboard</span><span class="o">.</span><span class="n">get_state</span><span class="p">())</span>
+            <span class="n">bitboard</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">play</span><span class="p">)</span>
+
+        <span class="n">bitboard</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bitboard</span><span class="o">.</span><span class="n">winner</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">player2</span> <span class="o">==</span> <span class="s1">&#39;user&#39;</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+            <span class="n">bitboard</span><span class="o">.</span><span class="n">user_move</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">play</span> <span class="o">=</span> <span class="n">player2</span><span class="o">.</span><span class="n">run_mcts</span><span class="p">(</span><span class="n">bitboard</span><span class="o">.</span><span class="n">get_state</span><span class="p">())</span>
+            <span class="n">bitboard</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">play</span><span class="p">)</span>
+
+        <span class="n">bitboard</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span></div>
+
+
+    
+
+<div class="viewcode-block" id="play_single_match">
+<a class="viewcode-back" href="../../othello_MCTS.html#othello_MCTS.simulation.play_single_match">[docs]</a>
+<span class="k">def</span> <span class="nf">play_single_match</span><span class="p">(</span><span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Similar to play_match, but the input parameters are dictionaries specifying player configurations.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    player1 : dict</span>
+<span class="sd">        Configuration for player1. Includes the following keys:</span>
+<span class="sd">            max_iter : int </span>
+<span class="sd">                Maximum iterations (used only if cap_method == &#39;iter&#39;).</span>
+<span class="sd">            C : int</span>
+<span class="sd">                Exploration parameter for MCTS.</span>
+<span class="sd">            selection_method : str</span>
+<span class="sd">                Method used for selection (&#39;random&#39; or &#39;uct&#39;).</span>
+<span class="sd">            player_type : str</span>
+<span class="sd">                Type of the player (&#39;MCTS&#39; or &#39;random&#39;).</span>
+<span class="sd">            iterations_per_simulation : int</span>
+<span class="sd">                Number of simulations per iteration.</span>
+<span class="sd">            max_runtime : int</span>
+<span class="sd">                Maximum runtime allowed for the simulation (in seconds, used only if cap_method == &#39;time&#39;).</span>
+<span class="sd">            cap_method : str</span>
+<span class="sd">                Method to cap the simulation (&#39;iter&#39; or &#39;time&#39;).</span>
+<span class="sd">    player2 : dict</span>
+<span class="sd">        Same as player1, but for player2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    int</span>
+<span class="sd">        The winner of the match:</span>
+<span class="sd">            1 for player1,</span>
+<span class="sd">            -1 for player2,</span>
+<span class="sd">            0 for a draw.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">play_match</span><span class="p">(</span><span class="n">MCTS</span><span class="p">(</span><span class="o">**</span><span class="n">player1</span><span class="p">),</span> <span class="n">MCTS</span><span class="p">(</span><span class="o">**</span><span class="n">player2</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="tournament">
+<a class="viewcode-back" href="../../othello_MCTS.html#othello_MCTS.simulation.tournament">[docs]</a>
+<span class="k">def</span> <span class="nf">tournament</span><span class="p">(</span><span class="n">players</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a tournament between multiple players, simulating 10 matches in parallel, and saves the results.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    players : list of dict</span>
+<span class="sd">        A list of player configurations, where each configuration is a dictionary containing parameters such as:</span>
+<span class="sd">            max_iter : int</span>
+<span class="sd">                Maximum iterations (used only if cap_method == &#39;iter&#39;).</span>
+<span class="sd">            C : int</span>
+<span class="sd">                Exploration parameter for MCTS.</span>
+<span class="sd">            selection_method : str</span>
+<span class="sd">                Method used for selection (&#39;random&#39; or &#39;uct&#39;).</span>
+<span class="sd">            player_type : str</span>
+<span class="sd">                Type of the player (&#39;MCTS&#39;).</span>
+<span class="sd">            iterations_per_simulation : int</span>
+<span class="sd">                Number of simulations per iteration.</span>
+<span class="sd">            max_runtime : int</span>
+<span class="sd">                Maximum runtime allowed for the simulation (in seconds, used only if cap_method == &#39;time&#39;).</span>
+<span class="sd">            cap_method : str</span>
+<span class="sd">                Method to cap the simulation (&#39;iter&#39; or &#39;time&#39;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    - Simulates 10 matches between each ordered pair of players in the list, meaning each player gets to be player1 and player2 against every other player.</span>
+<span class="sd">    - Aggregates the results as:</span>
+<span class="sd">        - `wins_player1[i, j]`: Number of wins for player1 when matched against player2.</span>
+<span class="sd">        - `wins_player2[i, j]`: Number of wins for player2 when matched against player1.</span>
+<span class="sd">        - `draws[i, j]`: Number of matches that ended in a draw between player1 and player2.</span>
+<span class="sd">    - Saves results in both `.npy` (binary) and `.txt` (readable) formats:</span>
+<span class="sd">        - `wins_player1.npy` / `wins_player1.txt`</span>
+<span class="sd">        - `wins_player2.npy` / `wins_player2.txt`</span>
+<span class="sd">        - `draws.npy` / `draws.txt`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wins_player1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)))</span>
+    <span class="n">wins_player2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)))</span>
+    <span class="n">draws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)))</span>
+
+    <span class="c1"># Use ProcessPoolExecutor for parallel execution</span>
+    <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">player1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">players</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">player2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">players</span><span class="p">):</span>
+                <span class="c1"># Run 10 matches in parallel</span>
+                <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">play_single_match</span><span class="p">,</span> <span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="p">]</span>
+                <span class="c1"># Aggregate results</span>
+                <span class="n">wins_player1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Player 1 wins</span>
+                <span class="n">wins_player2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Player 2 wins</span>
+                <span class="n">draws</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Save results</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;wins_player1.npy&#39;</span><span class="p">,</span> <span class="n">wins_player1</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;wins_player1.txt&#39;</span><span class="p">,</span> <span class="n">wins_player1</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;wins_player2.npy&#39;</span><span class="p">,</span> <span class="n">wins_player2</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;wins_player2.txt&#39;</span><span class="p">,</span> <span class="n">wins_player2</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;draws.npy&#39;</span><span class="p">,</span> <span class="n">draws</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;draws.txt&#39;</span><span class="p">,</span> <span class="n">draws</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, LASSIOUED Badis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

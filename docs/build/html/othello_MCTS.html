@@ -1,0 +1,1301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>othello_MCTS package &mdash; othello_MCTS 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="othello_MCTS" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            othello_MCTS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">othello_MCTS</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">othello_MCTS package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-othello_MCTS.MCTS">othello_MCTS.MCTS module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.MCTS.MCTS"><code class="docutils literal notranslate"><span class="pre">MCTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.MCTS.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-othello_MCTS.bitboard">othello_MCTS.bitboard module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.bitboard.Bitboard"><code class="docutils literal notranslate"><span class="pre">Bitboard</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.bitboard.display_bits_in_grid"><code class="docutils literal notranslate"><span class="pre">display_bits_in_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-othello_MCTS.simulation">othello_MCTS.simulation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.simulation.play_match"><code class="docutils literal notranslate"><span class="pre">play_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.simulation.play_single_match"><code class="docutils literal notranslate"><span class="pre">play_single_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.simulation.show_match"><code class="docutils literal notranslate"><span class="pre">show_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.simulation.tournament"><code class="docutils literal notranslate"><span class="pre">tournament()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-othello_MCTS">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.Bitboard"><code class="docutils literal notranslate"><span class="pre">Bitboard</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.MCTS"><code class="docutils literal notranslate"><span class="pre">MCTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.display_bits_in_grid"><code class="docutils literal notranslate"><span class="pre">display_bits_in_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.play_match"><code class="docutils literal notranslate"><span class="pre">play_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.play_single_match"><code class="docutils literal notranslate"><span class="pre">play_single_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.show_match"><code class="docutils literal notranslate"><span class="pre">show_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#othello_MCTS.tournament"><code class="docutils literal notranslate"><span class="pre">tournament()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">othello_MCTS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">othello_MCTS</a></li>
+      <li class="breadcrumb-item active">othello_MCTS package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/othello_MCTS.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="othello-mcts-package">
+<h1>othello_MCTS package<a class="headerlink" href="#othello-mcts-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-othello_MCTS.MCTS">
+<span id="othello-mcts-mcts-module"></span><h2>othello_MCTS.MCTS module<a class="headerlink" href="#module-othello_MCTS.MCTS" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.MCTS.</span></span><span class="sig-name descname"><span class="pre">MCTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MCTS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations_per_simulation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'iter'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Implements the Monte Carlo Tree Search algorithm.</p>
+<section id="attributes">
+<h3>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum number of iterations for the algorithm.</p>
+</dd>
+<dt>C<span class="classifier">float</span></dt><dd><p>Exploration parameter for UCT calculation.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Strategy for node selection (‘uct’ or ‘random’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of player (‘MCTS’ or ‘random’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of rollouts per simulation.</p>
+</dd>
+<dt>runtime<span class="classifier">float</span></dt><dd><p>Maximum allowed runtime for the algorithm.</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Termination criteria (‘time’ or ‘iter’).</p>
+</dd>
+<dt>root_state<span class="classifier">tuple</span></dt><dd><p>The state of the game at the root node.</p>
+</dd>
+<dt>main_player<span class="classifier">int</span></dt><dd><p>The player for whom the MCTS is being run.</p>
+</dd>
+<dt>root<span class="classifier">Node</span></dt><dd><p>The root node of the search tree.</p>
+</dd>
+<dt>run_time<span class="classifier">float</span></dt><dd><p>Time spent running the algorithm.</p>
+</dd>
+<dt>node_count<span class="classifier">int</span></dt><dd><p>Number of nodes generated during the search.</p>
+</dd>
+<dt>num_rollouts<span class="classifier">int</span></dt><dd><p>Total number of rollouts performed.</p>
+</dd>
+<dt>bitboard<span class="classifier">Bitboard</span></dt><dd><p>The bitboard representing the game state.</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods:<a class="headerlink" href="#methods" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>run_mcts(state):</dt><dd><p>Executes the MCTS algorithm to determine the best move.</p>
+</dd>
+<dt>select():</dt><dd><p>Selects a node to expand based on the selection strategy.</p>
+</dd>
+<dt>expand(parent):</dt><dd><p>Expands a node by generating its children.</p>
+</dd>
+<dt>run_simulation():</dt><dd><p>Runs a simulation from the current state and returns the resulting value.</p>
+</dd>
+<dt>back_propagate(node, value):</dt><dd><p>Propagates simulation results up the tree.</p>
+</dd>
+<dt>best_move():</dt><dd><p>Determines the best move based on child node values.</p>
+</dd>
+<dt>reset():</dt><dd><p>Resets the MCTS instance to its initial state.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.back_propagate">
+<span class="sig-name descname"><span class="pre">back_propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.back_propagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.back_propagate" title="Link to this definition"></a></dt>
+<dd><p>Propagates the simulation results up the tree, updating values and visit counts.</p>
+<section id="parameters">
+<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>node<span class="classifier">Node</span></dt><dd><p>The node from which backpropagation starts.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>The value to propagate up the tree.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.best_move">
+<span class="sig-name descname"><span class="pre">best_move</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.best_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.best_move" title="Link to this definition"></a></dt>
+<dd><p>Determines the best move by selecting the child node with the highest accumulated value.</p>
+<section id="returns">
+<h4>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>The move corresponding to the best child node.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.expand">
+<span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.expand" title="Link to this definition"></a></dt>
+<dd><p>Expands a node by generating all possible moves as its children.</p>
+<section id="id1">
+<h4>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>parent<span class="classifier">Node</span></dt><dd><p>The parent node to expand.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h4>Returns:<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the node was successfully expanded, False if no moves are possible.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the MCTS instance to its initial state, clearing the tree and other attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.run_mcts">
+<span class="sig-name descname"><span class="pre">run_mcts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.run_mcts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.run_mcts" title="Link to this definition"></a></dt>
+<dd><p>Executes the Monte Carlo Tree Search algorithm to determine the best move.</p>
+<section id="id3">
+<h4>Parameters:<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>state<span class="classifier">tuple</span></dt><dd><p>The initial game state for the MCTS.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h4>Returns:<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>The best move determined by the MCTS algorithm.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.run_simulation">
+<span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.run_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.run_simulation" title="Link to this definition"></a></dt>
+<dd><p>Runs a simulated game from the current state to estimate the value of a node.</p>
+<section id="id5">
+<h4>Returns:<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>float</dt><dd><p>The accumulated value from the simulation.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.MCTS.select">
+<span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.MCTS.select" title="Link to this definition"></a></dt>
+<dd><p>Traverses the tree to select a promising node based on the chosen selection strategy.</p>
+<section id="id6">
+<h4>Returns:<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>Node</dt><dd><p>The selected node for expansion or simulation.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.MCTS.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.Node" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a node in the Monte Carlo Tree Search.</p>
+<section id="id7">
+<h3>Attributes:<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>move<span class="classifier">int</span></dt><dd><p>The move associated with this node.</p>
+</dd>
+<dt>parent<span class="classifier">Node</span></dt><dd><p>The parent node in the search tree.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>The total value accumulated from simulations.</p>
+</dd>
+<dt>uct<span class="classifier">float</span></dt><dd><p>The Upper Confidence Bound for Trees (UCT) value for this node.</p>
+</dd>
+<dt>n_visits<span class="classifier">int</span></dt><dd><p>The number of times this node has been visited.</p>
+</dd>
+<dt>c<span class="classifier">float</span></dt><dd><p>Exploration parameter for UCT calculation.</p>
+</dd>
+<dt>children<span class="classifier">dict</span></dt><dd><p>A dictionary of child nodes indexed by their moves.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.Node.set_uct">
+<span class="sig-name descname"><span class="pre">set_uct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#Node.set_uct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.Node.set_uct" title="Link to this definition"></a></dt>
+<dd><p>Calculates and updates the UCT value of the node.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-othello_MCTS.bitboard">
+<span id="othello-mcts-bitboard-module"></span><h2>othello_MCTS.bitboard module<a class="headerlink" href="#module-othello_MCTS.bitboard" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.bitboard.</span></span><span class="sig-name descname"><span class="pre">Bitboard</span></span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a game board using bitboards for efficient game state representation and manipulation.</p>
+<section id="id8">
+<h3>Attributes:<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player_bitboards<span class="classifier">list</span></dt><dd><p>A list representing the bitboards for the two players. Index 1 represents one player, and index -1 the other.</p>
+</dd>
+<dt>colors<span class="classifier">list</span></dt><dd><p>A list of colors for representing the board and players visually.</p>
+</dd>
+<dt>turn<span class="classifier">int</span></dt><dd><p>The current turn, represented as 1 or -1.</p>
+</dd>
+<dt>in_board_mask<span class="classifier">int</span></dt><dd><p>A bitmask to determine valid positions within the board.</p>
+</dd>
+<dt>winner<span class="classifier">int or None</span></dt><dd><p>The winner of the game (1, -1, or 0 for a tie), or None if the game is ongoing.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Methods:<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>initiate_board():</dt><dd><p>Initializes the board setup for a new game.</p>
+</dd>
+<dt>make_mask():</dt><dd><p>Creates and returns a bitmask representing the valid positions on the board.</p>
+</dd>
+<dt>get_moves():</dt><dd><p>Determines all possible moves for the current player.</p>
+</dd>
+<dt>play(position=72):</dt><dd><p>Plays a move at the specified position or selects one randomly if the position is invalid.</p>
+</dd>
+<dt>is_full():</dt><dd><p>Checks if the board is full.</p>
+</dd>
+<dt>get_winner():</dt><dd><p>Determines the winner based on the current board state.</p>
+</dd>
+<dt>set_state(state):</dt><dd><p>Sets the board and turn to the provided state.</p>
+</dd>
+<dt>get_state():</dt><dd><p>Returns a copy of the current state of the game.</p>
+</dd>
+<dt>reset():</dt><dd><p>Resets the game to its initial state.</p>
+</dd>
+<dt>user_move(surface, width, height):</dt><dd><p>Handles user interactions for making a move.</p>
+</dd>
+<dt>show(surface, width, height):</dt><dd><p>Displays the board on a pygame surface</p>
+</dd>
+<dt>show_with_possible_moves(surface, width, height):</dt><dd><p>Displays the board on a pygame surface with the possible moves highlighted in green</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.get_moves">
+<span class="sig-name descname"><span class="pre">get_moves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.get_moves" title="Link to this definition"></a></dt>
+<dd><p>Determines all possible moves for the current player, categorized by direction.</p>
+<section id="id10">
+<h4>Returns:<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>tuple:</dt><dd><ul class="simple">
+<li><p>moves_by_direction1 (list): Moves for positive shift directions.</p></li>
+<li><p>moves_by_direction2 (list): Moves for negative shift directions.</p></li>
+<li><p>moves (int): A bitboard representing all possible moves.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.get_state">
+<span class="sig-name descname"><span class="pre">get_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.get_state" title="Link to this definition"></a></dt>
+<dd><p>Returns a copy of the current state of the game.</p>
+<section id="id11">
+<h4>Returns:<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>tuple:</dt><dd><p>A tuple containing the player bitboards and turn.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.get_winner">
+<span class="sig-name descname"><span class="pre">get_winner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.get_winner" title="Link to this definition"></a></dt>
+<dd><p>Determines the winner based on the board state.</p>
+<section id="id12">
+<h4>Returns:<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int:</dt><dd><p>1 if player 1 wins, -1 if player -1 wins, 0 for a tie.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.initiate_board">
+<span class="sig-name descname"><span class="pre">initiate_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.initiate_board"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.initiate_board" title="Link to this definition"></a></dt>
+<dd><p>Initialize the board by setting specific positions on the bitboard.</p>
+<p>This function sets predefined positions on the player’s bitboards to
+represent the initial state of the game. It places two pieces for
+each player in the center of the board.</p>
+<section id="modifies">
+<h4>Modifies:<a class="headerlink" href="#modifies" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>self.player_bitboards<span class="classifier">list</span></dt><dd><p>Updates the bitboards for both players to reflect the starting positions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.is_full">
+<span class="sig-name descname"><span class="pre">is_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.is_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.is_full" title="Link to this definition"></a></dt>
+<dd><p>Checks if the board is full.</p>
+<section id="id13">
+<h4>Returns:<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int:</dt><dd><p>A mask representing filled positions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.make_mask">
+<span class="sig-name descname"><span class="pre">make_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.make_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.make_mask" title="Link to this definition"></a></dt>
+<dd><p>Generate a bit mask covering all valid board positions.</p>
+<p>This function creates a bitmask representing all positions on the board
+that can be occupied. The board is an 8x8 grid, and the mask
+ensures that all positions are included.</p>
+<section id="id14">
+<h4>Returns:<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>A bitmask with all valid board positions set to 1.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.play">
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.play" title="Link to this definition"></a></dt>
+<dd><p>Executes a move at the given position or selects a valid position randomly if invalid.</p>
+<section id="id15">
+<h4>Parameters:<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>position<span class="classifier">int, optional</span></dt><dd><p>The bit position where the move is to be played (default is 72 which is always invalid).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the game to its initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.set_state">
+<span class="sig-name descname"><span class="pre">set_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.set_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.set_state" title="Link to this definition"></a></dt>
+<dd><p>Sets the game state to the provided state.</p>
+<section id="id16">
+<h4>Parameters:<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>state<span class="classifier">tuple</span></dt><dd><p>A tuple containing the player bitboards and turn.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.show" title="Link to this definition"></a></dt>
+<dd><p>Displays the current game state on a Pygame surface.</p>
+<section id="id17">
+<h4>Parameters:<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface to draw the game board on.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the game board.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the game board.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.show_with_possible_moves">
+<span class="sig-name descname"><span class="pre">show_with_possible_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.show_with_possible_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.show_with_possible_moves" title="Link to this definition"></a></dt>
+<dd><p>Displays the current game state on a Pygame surface with the possible moves to play.</p>
+<section id="id18">
+<h4>Parameters:<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface to draw the game board on.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the game board.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the game board.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.Bitboard.user_move">
+<span class="sig-name descname"><span class="pre">user_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.user_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.Bitboard.user_move" title="Link to this definition"></a></dt>
+<dd><p>Handles user interactions to play a move.</p>
+<section id="id19">
+<h4>Parameters:<a class="headerlink" href="#id19" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface on which the game is drawn.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the surface.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the surface.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.bitboard.display_bits_in_grid">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.bitboard.</span></span><span class="sig-name descname"><span class="pre">display_bits_in_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#display_bits_in_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.bitboard.display_bits_in_grid" title="Link to this definition"></a></dt>
+<dd><p>display a 72-bit integer in a 9*8 grid.</p>
+<section id="id20">
+<h3>Parameters:<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>num<span class="classifier">int</span></dt><dd><p>integer to display</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-othello_MCTS.simulation">
+<span id="othello-mcts-simulation-module"></span><h2>othello_MCTS.simulation module<a class="headerlink" href="#module-othello_MCTS.simulation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.simulation.play_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.simulation.</span></span><span class="sig-name descname"><span class="pre">play_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#play_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.simulation.play_match" title="Link to this definition"></a></dt>
+<dd><p>Plays a single match where player1 starts and returns the winner.</p>
+<section id="id21">
+<h3>Parameters:<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The first player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+<dt>player2<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The second player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Returns:<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>int</dt><dd><dl class="simple">
+<dt>The winner of the match:</dt><dd><p>1 for player1,
+-1 for player2,
+0 for a draw.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.simulation.play_single_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.simulation.</span></span><span class="sig-name descname"><span class="pre">play_single_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#play_single_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.simulation.play_single_match" title="Link to this definition"></a></dt>
+<dd><p>Similar to play_match, but the input parameters are dictionaries specifying player configurations.</p>
+<section id="id23">
+<h3>Parameters:<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>Configuration for player1. Includes the following keys:</dt><dd><dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum iterations (used only if cap_method == ‘iter’).</p>
+</dd>
+<dt>C<span class="classifier">int</span></dt><dd><p>Exploration parameter for MCTS.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Method used for selection (‘random’ or ‘uct’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of the player (‘MCTS’ or ‘random’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of simulations per iteration.</p>
+</dd>
+<dt>max_runtime<span class="classifier">int</span></dt><dd><p>Maximum runtime allowed for the simulation (in seconds, used only if cap_method == ‘time’).</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Method to cap the simulation (‘iter’ or ‘time’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>player2<span class="classifier">dict</span></dt><dd><p>Same as player1, but for player2.</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h3>Returns:<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>int</dt><dd><dl class="simple">
+<dt>The winner of the match:</dt><dd><p>1 for player1,
+-1 for player2,
+0 for a draw.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.simulation.show_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.simulation.</span></span><span class="sig-name descname"><span class="pre">show_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#show_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.simulation.show_match" title="Link to this definition"></a></dt>
+<dd><p>Plays and displays a single match where player1 starts.</p>
+<section id="id25">
+<h3>Parameters:<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The first player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+<dt>player2<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The second player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.simulation.tournament">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.simulation.</span></span><span class="sig-name descname"><span class="pre">tournament</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#tournament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.simulation.tournament" title="Link to this definition"></a></dt>
+<dd><p>Runs a tournament between multiple players, simulating 10 matches in parallel, and saves the results.</p>
+<section id="id26">
+<h3>Parameters:<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>players<span class="classifier">list of dict</span></dt><dd><dl class="simple">
+<dt>A list of player configurations, where each configuration is a dictionary containing parameters such as:</dt><dd><dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum iterations (used only if cap_method == ‘iter’).</p>
+</dd>
+<dt>C<span class="classifier">int</span></dt><dd><p>Exploration parameter for MCTS.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Method used for selection (‘random’ or ‘uct’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of the player (‘MCTS’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of simulations per iteration.</p>
+</dd>
+<dt>max_runtime<span class="classifier">int</span></dt><dd><p>Maximum runtime allowed for the simulation (in seconds, used only if cap_method == ‘time’).</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Method to cap the simulation (‘iter’ or ‘time’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="id27">
+<h3>Returns:<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+<section id="notes">
+<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Simulates 10 matches between each ordered pair of players in the list, meaning each player gets to be player1 and player2 against every other player.</p></li>
+<li><dl class="simple">
+<dt>Aggregates the results as:</dt><dd><ul>
+<li><p><cite>wins_player1[i, j]</cite>: Number of wins for player1 when matched against player2.</p></li>
+<li><p><cite>wins_player2[i, j]</cite>: Number of wins for player2 when matched against player1.</p></li>
+<li><p><cite>draws[i, j]</cite>: Number of matches that ended in a draw between player1 and player2.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Saves results in both <cite>.npy</cite> (binary) and <cite>.txt</cite> (readable) formats:</dt><dd><ul>
+<li><p><cite>wins_player1.npy</cite> / <cite>wins_player1.txt</cite></p></li>
+<li><p><cite>wins_player2.npy</cite> / <cite>wins_player2.txt</cite></p></li>
+<li><p><cite>draws.npy</cite> / <cite>draws.txt</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-othello_MCTS">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-othello_MCTS" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">Bitboard</span></span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a game board using bitboards for efficient game state representation and manipulation.</p>
+<section id="id28">
+<h3>Attributes:<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player_bitboards<span class="classifier">list</span></dt><dd><p>A list representing the bitboards for the two players. Index 1 represents one player, and index -1 the other.</p>
+</dd>
+<dt>colors<span class="classifier">list</span></dt><dd><p>A list of colors for representing the board and players visually.</p>
+</dd>
+<dt>turn<span class="classifier">int</span></dt><dd><p>The current turn, represented as 1 or -1.</p>
+</dd>
+<dt>in_board_mask<span class="classifier">int</span></dt><dd><p>A bitmask to determine valid positions within the board.</p>
+</dd>
+<dt>winner<span class="classifier">int or None</span></dt><dd><p>The winner of the game (1, -1, or 0 for a tie), or None if the game is ongoing.</p>
+</dd>
+</dl>
+</section>
+<section id="id29">
+<h3>Methods:<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>initiate_board():</dt><dd><p>Initializes the board setup for a new game.</p>
+</dd>
+<dt>make_mask():</dt><dd><p>Creates and returns a bitmask representing the valid positions on the board.</p>
+</dd>
+<dt>get_moves():</dt><dd><p>Determines all possible moves for the current player.</p>
+</dd>
+<dt>play(position=72):</dt><dd><p>Plays a move at the specified position or selects one randomly if the position is invalid.</p>
+</dd>
+<dt>is_full():</dt><dd><p>Checks if the board is full.</p>
+</dd>
+<dt>get_winner():</dt><dd><p>Determines the winner based on the current board state.</p>
+</dd>
+<dt>set_state(state):</dt><dd><p>Sets the board and turn to the provided state.</p>
+</dd>
+<dt>get_state():</dt><dd><p>Returns a copy of the current state of the game.</p>
+</dd>
+<dt>reset():</dt><dd><p>Resets the game to its initial state.</p>
+</dd>
+<dt>user_move(surface, width, height):</dt><dd><p>Handles user interactions for making a move.</p>
+</dd>
+<dt>show(surface, width, height):</dt><dd><p>Displays the board on a pygame surface</p>
+</dd>
+<dt>show_with_possible_moves(surface, width, height):</dt><dd><p>Displays the board on a pygame surface with the possible moves highlighted in green</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.get_moves">
+<span class="sig-name descname"><span class="pre">get_moves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.get_moves" title="Link to this definition"></a></dt>
+<dd><p>Determines all possible moves for the current player, categorized by direction.</p>
+<section id="id30">
+<h4>Returns:<a class="headerlink" href="#id30" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>tuple:</dt><dd><ul class="simple">
+<li><p>moves_by_direction1 (list): Moves for positive shift directions.</p></li>
+<li><p>moves_by_direction2 (list): Moves for negative shift directions.</p></li>
+<li><p>moves (int): A bitboard representing all possible moves.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.get_state">
+<span class="sig-name descname"><span class="pre">get_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.get_state" title="Link to this definition"></a></dt>
+<dd><p>Returns a copy of the current state of the game.</p>
+<section id="id31">
+<h4>Returns:<a class="headerlink" href="#id31" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>tuple:</dt><dd><p>A tuple containing the player bitboards and turn.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.get_winner">
+<span class="sig-name descname"><span class="pre">get_winner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.get_winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.get_winner" title="Link to this definition"></a></dt>
+<dd><p>Determines the winner based on the board state.</p>
+<section id="id32">
+<h4>Returns:<a class="headerlink" href="#id32" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int:</dt><dd><p>1 if player 1 wins, -1 if player -1 wins, 0 for a tie.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.initiate_board">
+<span class="sig-name descname"><span class="pre">initiate_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.initiate_board"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.initiate_board" title="Link to this definition"></a></dt>
+<dd><p>Initialize the board by setting specific positions on the bitboard.</p>
+<p>This function sets predefined positions on the player’s bitboards to
+represent the initial state of the game. It places two pieces for
+each player in the center of the board.</p>
+<section id="id33">
+<h4>Modifies:<a class="headerlink" href="#id33" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>self.player_bitboards<span class="classifier">list</span></dt><dd><p>Updates the bitboards for both players to reflect the starting positions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.is_full">
+<span class="sig-name descname"><span class="pre">is_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.is_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.is_full" title="Link to this definition"></a></dt>
+<dd><p>Checks if the board is full.</p>
+<section id="id34">
+<h4>Returns:<a class="headerlink" href="#id34" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int:</dt><dd><p>A mask representing filled positions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.make_mask">
+<span class="sig-name descname"><span class="pre">make_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.make_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.make_mask" title="Link to this definition"></a></dt>
+<dd><p>Generate a bit mask covering all valid board positions.</p>
+<p>This function creates a bitmask representing all positions on the board
+that can be occupied. The board is an 8x8 grid, and the mask
+ensures that all positions are included.</p>
+<section id="id35">
+<h4>Returns:<a class="headerlink" href="#id35" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>A bitmask with all valid board positions set to 1.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.play">
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.play" title="Link to this definition"></a></dt>
+<dd><p>Executes a move at the given position or selects a valid position randomly if invalid.</p>
+<section id="id36">
+<h4>Parameters:<a class="headerlink" href="#id36" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>position<span class="classifier">int, optional</span></dt><dd><p>The bit position where the move is to be played (default is 72 which is always invalid).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the game to its initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.set_state">
+<span class="sig-name descname"><span class="pre">set_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.set_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.set_state" title="Link to this definition"></a></dt>
+<dd><p>Sets the game state to the provided state.</p>
+<section id="id37">
+<h4>Parameters:<a class="headerlink" href="#id37" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>state<span class="classifier">tuple</span></dt><dd><p>A tuple containing the player bitboards and turn.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.show" title="Link to this definition"></a></dt>
+<dd><p>Displays the current game state on a Pygame surface.</p>
+<section id="id38">
+<h4>Parameters:<a class="headerlink" href="#id38" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface to draw the game board on.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the game board.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the game board.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.show_with_possible_moves">
+<span class="sig-name descname"><span class="pre">show_with_possible_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.show_with_possible_moves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.show_with_possible_moves" title="Link to this definition"></a></dt>
+<dd><p>Displays the current game state on a Pygame surface with the possible moves to play.</p>
+<section id="id39">
+<h4>Parameters:<a class="headerlink" href="#id39" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface to draw the game board on.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the game board.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the game board.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Bitboard.user_move">
+<span class="sig-name descname"><span class="pre">user_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#Bitboard.user_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Bitboard.user_move" title="Link to this definition"></a></dt>
+<dd><p>Handles user interactions to play a move.</p>
+<section id="id40">
+<h4>Parameters:<a class="headerlink" href="#id40" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>surface<span class="classifier">pygame.Surface</span></dt><dd><p>The surface on which the game is drawn.</p>
+</dd>
+<dt>width<span class="classifier">int</span></dt><dd><p>The width of the surface.</p>
+</dd>
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the surface.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">MCTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MCTS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations_per_simulation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'iter'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Implements the Monte Carlo Tree Search algorithm.</p>
+<section id="id41">
+<h3>Attributes:<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum number of iterations for the algorithm.</p>
+</dd>
+<dt>C<span class="classifier">float</span></dt><dd><p>Exploration parameter for UCT calculation.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Strategy for node selection (‘uct’ or ‘random’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of player (‘MCTS’ or ‘random’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of rollouts per simulation.</p>
+</dd>
+<dt>runtime<span class="classifier">float</span></dt><dd><p>Maximum allowed runtime for the algorithm.</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Termination criteria (‘time’ or ‘iter’).</p>
+</dd>
+<dt>root_state<span class="classifier">tuple</span></dt><dd><p>The state of the game at the root node.</p>
+</dd>
+<dt>main_player<span class="classifier">int</span></dt><dd><p>The player for whom the MCTS is being run.</p>
+</dd>
+<dt>root<span class="classifier">Node</span></dt><dd><p>The root node of the search tree.</p>
+</dd>
+<dt>run_time<span class="classifier">float</span></dt><dd><p>Time spent running the algorithm.</p>
+</dd>
+<dt>node_count<span class="classifier">int</span></dt><dd><p>Number of nodes generated during the search.</p>
+</dd>
+<dt>num_rollouts<span class="classifier">int</span></dt><dd><p>Total number of rollouts performed.</p>
+</dd>
+<dt>bitboard<span class="classifier">Bitboard</span></dt><dd><p>The bitboard representing the game state.</p>
+</dd>
+</dl>
+</section>
+<section id="id42">
+<h3>Methods:<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>run_mcts(state):</dt><dd><p>Executes the MCTS algorithm to determine the best move.</p>
+</dd>
+<dt>select():</dt><dd><p>Selects a node to expand based on the selection strategy.</p>
+</dd>
+<dt>expand(parent):</dt><dd><p>Expands a node by generating its children.</p>
+</dd>
+<dt>run_simulation():</dt><dd><p>Runs a simulation from the current state and returns the resulting value.</p>
+</dd>
+<dt>back_propagate(node, value):</dt><dd><p>Propagates simulation results up the tree.</p>
+</dd>
+<dt>best_move():</dt><dd><p>Determines the best move based on child node values.</p>
+</dd>
+<dt>reset():</dt><dd><p>Resets the MCTS instance to its initial state.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.back_propagate">
+<span class="sig-name descname"><span class="pre">back_propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.back_propagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.back_propagate" title="Link to this definition"></a></dt>
+<dd><p>Propagates the simulation results up the tree, updating values and visit counts.</p>
+<section id="id43">
+<h4>Parameters:<a class="headerlink" href="#id43" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>node<span class="classifier">Node</span></dt><dd><p>The node from which backpropagation starts.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>The value to propagate up the tree.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.best_move">
+<span class="sig-name descname"><span class="pre">best_move</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.best_move"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.best_move" title="Link to this definition"></a></dt>
+<dd><p>Determines the best move by selecting the child node with the highest accumulated value.</p>
+<section id="id44">
+<h4>Returns:<a class="headerlink" href="#id44" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>The move corresponding to the best child node.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.expand">
+<span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.expand" title="Link to this definition"></a></dt>
+<dd><p>Expands a node by generating all possible moves as its children.</p>
+<section id="id45">
+<h4>Parameters:<a class="headerlink" href="#id45" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>parent<span class="classifier">Node</span></dt><dd><p>The parent node to expand.</p>
+</dd>
+</dl>
+</section>
+<section id="id46">
+<h4>Returns:<a class="headerlink" href="#id46" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the node was successfully expanded, False if no moves are possible.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the MCTS instance to its initial state, clearing the tree and other attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.run_mcts">
+<span class="sig-name descname"><span class="pre">run_mcts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.run_mcts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.run_mcts" title="Link to this definition"></a></dt>
+<dd><p>Executes the Monte Carlo Tree Search algorithm to determine the best move.</p>
+<section id="id47">
+<h4>Parameters:<a class="headerlink" href="#id47" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>state<span class="classifier">tuple</span></dt><dd><p>The initial game state for the MCTS.</p>
+</dd>
+</dl>
+</section>
+<section id="id48">
+<h4>Returns:<a class="headerlink" href="#id48" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>int</dt><dd><p>The best move determined by the MCTS algorithm.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.run_simulation">
+<span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.run_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.run_simulation" title="Link to this definition"></a></dt>
+<dd><p>Runs a simulated game from the current state to estimate the value of a node.</p>
+<section id="id49">
+<h4>Returns:<a class="headerlink" href="#id49" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>float</dt><dd><p>The accumulated value from the simulation.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.MCTS.select">
+<span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#MCTS.select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.MCTS.select" title="Link to this definition"></a></dt>
+<dd><p>Traverses the tree to select a promising node based on the chosen selection strategy.</p>
+<section id="id50">
+<h4>Returns:<a class="headerlink" href="#id50" title="Link to this heading"></a></h4>
+<dl class="simple">
+<dt>Node</dt><dd><p>The selected node for expansion or simulation.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="othello_MCTS.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Node" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a node in the Monte Carlo Tree Search.</p>
+<section id="id51">
+<h3>Attributes:<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>move<span class="classifier">int</span></dt><dd><p>The move associated with this node.</p>
+</dd>
+<dt>parent<span class="classifier">Node</span></dt><dd><p>The parent node in the search tree.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>The total value accumulated from simulations.</p>
+</dd>
+<dt>uct<span class="classifier">float</span></dt><dd><p>The Upper Confidence Bound for Trees (UCT) value for this node.</p>
+</dd>
+<dt>n_visits<span class="classifier">int</span></dt><dd><p>The number of times this node has been visited.</p>
+</dd>
+<dt>c<span class="classifier">float</span></dt><dd><p>Exploration parameter for UCT calculation.</p>
+</dd>
+<dt>children<span class="classifier">dict</span></dt><dd><p>A dictionary of child nodes indexed by their moves.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="othello_MCTS.Node.set_uct">
+<span class="sig-name descname"><span class="pre">set_uct</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/MCTS.html#Node.set_uct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.Node.set_uct" title="Link to this definition"></a></dt>
+<dd><p>Calculates and updates the UCT value of the node.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.display_bits_in_grid">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">display_bits_in_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/bitboard.html#display_bits_in_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.display_bits_in_grid" title="Link to this definition"></a></dt>
+<dd><p>display a 72-bit integer in a 9*8 grid.</p>
+<section id="id52">
+<h3>Parameters:<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>num<span class="classifier">int</span></dt><dd><p>integer to display</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.play_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">play_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#play_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.play_match" title="Link to this definition"></a></dt>
+<dd><p>Plays a single match where player1 starts and returns the winner.</p>
+<section id="id53">
+<h3>Parameters:<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The first player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+<dt>player2<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The second player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+</dl>
+</section>
+<section id="id54">
+<h3>Returns:<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>int</dt><dd><dl class="simple">
+<dt>The winner of the match:</dt><dd><p>1 for player1,
+-1 for player2,
+0 for a draw.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.play_single_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">play_single_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#play_single_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.play_single_match" title="Link to this definition"></a></dt>
+<dd><p>Similar to play_match, but the input parameters are dictionaries specifying player configurations.</p>
+<section id="id55">
+<h3>Parameters:<a class="headerlink" href="#id55" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>Configuration for player1. Includes the following keys:</dt><dd><dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum iterations (used only if cap_method == ‘iter’).</p>
+</dd>
+<dt>C<span class="classifier">int</span></dt><dd><p>Exploration parameter for MCTS.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Method used for selection (‘random’ or ‘uct’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of the player (‘MCTS’ or ‘random’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of simulations per iteration.</p>
+</dd>
+<dt>max_runtime<span class="classifier">int</span></dt><dd><p>Maximum runtime allowed for the simulation (in seconds, used only if cap_method == ‘time’).</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Method to cap the simulation (‘iter’ or ‘time’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>player2<span class="classifier">dict</span></dt><dd><p>Same as player1, but for player2.</p>
+</dd>
+</dl>
+</section>
+<section id="id56">
+<h3>Returns:<a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>int</dt><dd><dl class="simple">
+<dt>The winner of the match:</dt><dd><p>1 for player1,
+-1 for player2,
+0 for a draw.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.show_match">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">show_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#show_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.show_match" title="Link to this definition"></a></dt>
+<dd><p>Plays and displays a single match where player1 starts.</p>
+<section id="id57">
+<h3>Parameters:<a class="headerlink" href="#id57" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>player1<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The first player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+<dt>player2<span class="classifier">MCTS or ‘user’</span></dt><dd><p>The second player of the match. Can be an instance of the MCTS class or a user input (‘user’).</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="othello_MCTS.tournament">
+<span class="sig-prename descclassname"><span class="pre">othello_MCTS.</span></span><span class="sig-name descname"><span class="pre">tournament</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/othello_MCTS/simulation.html#tournament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#othello_MCTS.tournament" title="Link to this definition"></a></dt>
+<dd><p>Runs a tournament between multiple players, simulating 10 matches in parallel, and saves the results.</p>
+<section id="id58">
+<h3>Parameters:<a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>players<span class="classifier">list of dict</span></dt><dd><dl class="simple">
+<dt>A list of player configurations, where each configuration is a dictionary containing parameters such as:</dt><dd><dl class="simple">
+<dt>max_iter<span class="classifier">int</span></dt><dd><p>Maximum iterations (used only if cap_method == ‘iter’).</p>
+</dd>
+<dt>C<span class="classifier">int</span></dt><dd><p>Exploration parameter for MCTS.</p>
+</dd>
+<dt>selection_method<span class="classifier">str</span></dt><dd><p>Method used for selection (‘random’ or ‘uct’).</p>
+</dd>
+<dt>player_type<span class="classifier">str</span></dt><dd><p>Type of the player (‘MCTS’).</p>
+</dd>
+<dt>iterations_per_simulation<span class="classifier">int</span></dt><dd><p>Number of simulations per iteration.</p>
+</dd>
+<dt>max_runtime<span class="classifier">int</span></dt><dd><p>Maximum runtime allowed for the simulation (in seconds, used only if cap_method == ‘time’).</p>
+</dd>
+<dt>cap_method<span class="classifier">str</span></dt><dd><p>Method to cap the simulation (‘iter’ or ‘time’).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="id59">
+<h3>Returns:<a class="headerlink" href="#id59" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+<section id="id60">
+<h3>Notes:<a class="headerlink" href="#id60" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Simulates 10 matches between each ordered pair of players in the list, meaning each player gets to be player1 and player2 against every other player.</p></li>
+<li><dl class="simple">
+<dt>Aggregates the results as:</dt><dd><ul>
+<li><p><cite>wins_player1[i, j]</cite>: Number of wins for player1 when matched against player2.</p></li>
+<li><p><cite>wins_player2[i, j]</cite>: Number of wins for player2 when matched against player1.</p></li>
+<li><p><cite>draws[i, j]</cite>: Number of matches that ended in a draw between player1 and player2.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Saves results in both <cite>.npy</cite> (binary) and <cite>.txt</cite> (readable) formats:</dt><dd><ul>
+<li><p><cite>wins_player1.npy</cite> / <cite>wins_player1.txt</cite></p></li>
+<li><p><cite>wins_player2.npy</cite> / <cite>wins_player2.txt</cite></p></li>
+<li><p><cite>draws.npy</cite> / <cite>draws.txt</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="othello_MCTS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, LASSIOUED Badis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
