@@ -82,6 +82,7 @@ show_match(MCTS(),MCTS())
 │   ├── simulation.py        # basic funstions to show/play matches
 │   └── MCTS.py              # MCTS algorithm implementation
 ├── docs/                    # html documentation
+├── images/                  # readme image
 ├── main.py                  # Main script for running matches and tournaments
 ├── setup.py                 # Python setup file
 └── README.md                # Documentation
